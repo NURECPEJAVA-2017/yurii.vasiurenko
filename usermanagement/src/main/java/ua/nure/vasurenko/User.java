@@ -1,9 +1,52 @@
 package ua.nure.vasurenko;
-
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {
 	private Long id;
+	private String firstName;
+	private String lastName;
+	private Date dateOfBirth;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
+				+ "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -14,6 +57,7 @@ public class User {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -45,42 +89,43 @@ public class User {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
-				+ "]";
-	}
-	private String firstName;
-	private String lastName;
-	private Date dateOfBirth;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+
 	public String getFullName() {
 
 		return new StringBuilder().append(firstName).append(" ").append(lastName).toString();
 	}
 
+	public int getAge() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+
+		int curday = calendar.get(Calendar.DAY_OF_MONTH);
+		int curmonth = calendar.get(Calendar.MONTH);
+		int curyear = calendar.get(Calendar.YEAR);
+
+		calendar.setTime(dateOfBirth);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int month = calendar.get(Calendar.MONTH);
+		int year = calendar.get(Calendar.YEAR);
+		
+		int result = 0;
+
+		if (curmonth >= month) {
+			if (curday >= day) {
+				result = curyear - year;
+			  	return result;
+			}
+			else {
+				result = curyear - year-1 ;
+			}
+		}
+		else{
+			result = curyear - year-1 ;
+		}
+		return result;
+		
+		
+				
+
+	}
 }
-//////////////////////////////////////////
