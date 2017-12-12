@@ -8,6 +8,18 @@ public class User {
 	private String lastName;
 	private Date dateOfBirth;
 
+	public User(User user) {
+		this.id = user.getId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.getDateOfBirth();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}
